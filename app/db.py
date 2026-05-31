@@ -7,17 +7,21 @@ import psycopg2.extras
 import psycopg2.pool
 import streamlit as st
 import logging
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 logging.basicConfig(level=logging.ERROR)
 logger = logging.getLogger(__name__)
 
 # ── DB Config ─────────────────────────────────────────────────────────────
 DB_CONFIG = {
-    "host":     "localhost",
-    "database": "HMS",
-    "user":     "postgres",
-    "password": "your_password",  # ← Set your PostgreSQL password here,# ← Change to your password
-    "port":     5432
+    "host": os.getenv("DB_HOST"),
+    "database": os.getenv("DB_NAME"),
+    "user": os.getenv("DB_USER"),
+    "password": os.getenv("DB_PASSWORD"),
+    "port": int(os.getenv("DB_PORT", 5432))
 }
 
 # ── Friendly Error Messages ───────────────────────────────────────────────

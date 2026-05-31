@@ -7,9 +7,10 @@ from datetime import date
 from db import run_query, run_query_one
 from validators import (validate_icd_code, validate_text,
                         validate_dosage, sanitize_string)
-
+from auth import require_role
 
 def get_doctor_id(user: dict):
+    require_role(["Doctor"])
     if user.get('staff_ref_id'):
         exists = run_query_one("SELECT doctor_id FROM doctors WHERE doctor_id=%s", [user['staff_ref_id']])
         if exists:
@@ -24,6 +25,7 @@ def get_doctor_id(user: dict):
 
 
 def show_dashboard(user):
+    require_role(["Doctor"])
     st.markdown("## 👨‍⚕️ Doctor Dashboard")
     doc_id = get_doctor_id(user)
     if not doc_id:
@@ -41,6 +43,7 @@ def show_dashboard(user):
 
 
 def show_appointments(user):
+    require_role(["Doctor"])
     st.markdown("## 📅 My Appointments")
     doc_id = get_doctor_id(user)
     if not doc_id:
@@ -77,6 +80,7 @@ def show_appointments(user):
 
 
 def show_diagnose(user):
+    require_role(["Doctor"])
     st.markdown("## 🩺 Diagnose & Prescribe")
     doc_id = get_doctor_id(user)
     if not doc_id:
@@ -160,6 +164,7 @@ def show_diagnose(user):
 
 
 def show_lab(user):
+    require_role(["Doctor"])
     st.markdown("## 🔬 Order Lab Tests")
     doc_id = get_doctor_id(user)
     if not doc_id:

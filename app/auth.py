@@ -103,8 +103,11 @@ def login(username: str, password: str) -> tuple[dict | None, str | None]:
 # ── Session helpers ───────────────────────────────────────────────────────
 def set_session(user: dict):
     """Store user in Streamlit session state."""
-    st.session_state["user"]       = user
-    st.session_state["login_time"] = datetime.datetime.now()
+    now = datetime.datetime.now()
+    
+    st.session_state["user"] = user
+    st.session_state["login_time"] = now
+    st.session_state["last_activity"] = now
 
 
 def get_session() -> dict | None:
@@ -118,9 +121,15 @@ def is_logged_in() -> bool:
 
 def require_login():
     """Redirect to login if not authenticated."""
+    
+    check_session_timeout()
+
     if not is_logged_in():
         st.warning("⚠️ Please login to access this page.")
         st.stop()
+
+    st.session_state["last_activity"] = datetime.datetime.now()
+
     return st.session_state["user"]
 
 
@@ -145,10 +154,16 @@ SESSION_TIMEOUT_MINUTES = 60
 
 def check_session_timeout():
     """Auto-logout after inactivity."""
+    
     if not is_logged_in():
         return
-    login_time = st.session_state.get("login_time")
-    if login_time:
-        elapsed = (datetime.datetime.now() - login_time).total_seconds() / 60
-        if elapsed > SESSION_TIMEOUT_MINUTES:
+
+    last_activity = st.session_state.get("last_activity")
+
+    if last_activity:
+        elapsed = (
+            datetime.datetime.now() - last_activity
+        ).total_seconds() / 60
+
+        if elapsed >= SESSION_TIMEOUT_MINUTES:
             logout()

@@ -11,9 +11,11 @@ from validators import (validate_name, validate_email, validate_phone,
                         validate_password, validate_username,
                         validate_medicine_name, validate_stock_quantity,
                         validate_amount, sanitize_string)
+from auth import require_role
 
 
 def show_dashboard(user):
+    require_role(["Admin"])
     st.markdown('<p class="page-title">📊 Admin Dashboard</p>', unsafe_allow_html=True)
 
     # ── Metrics using native st.metric (no HTML rendering issue) ──
@@ -66,6 +68,7 @@ def show_dashboard(user):
 
 
 def show_doctors(user):
+    require_role(["Admin"])
     st.markdown('<p class="page-title">👨‍⚕️ Doctor Management</p>', unsafe_allow_html=True)
     tab1, tab2 = st.tabs(["All Doctors", "Add New Doctor"])
 
@@ -126,6 +129,7 @@ def show_doctors(user):
 
 # ── Feature 4: Admin Medicine Management ─────────────────────
 def show_medicines(user):
+    require_role(["Admin"])
     st.markdown('<p class="page-title">💊 Medicine Management</p>', unsafe_allow_html=True)
     tab1, tab2, tab3 = st.tabs(["All Medicines", "Add New Medicine", "Restock"])
 
@@ -234,6 +238,7 @@ def show_medicines(user):
 
 
 def show_audit(user):
+    require_role(["Admin"])
     st.markdown('<p class="page-title">📋 Audit Log</p>', unsafe_allow_html=True)
     col1, col2, col3 = st.columns(3)
     with col1: table_f = st.selectbox("Table", ["All","patients","appointments","bills","medicines"])
@@ -255,6 +260,7 @@ def show_audit(user):
 
 
 def show_settings(user):
+    require_role(["Admin"])
     st.markdown('<p class="page-title">⚙️ Settings</p>', unsafe_allow_html=True)
     tab1, tab2 = st.tabs(["User Management", "Create New User"])
 

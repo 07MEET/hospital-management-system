@@ -15,7 +15,7 @@ from validators import (validate_name, validate_email, validate_phone,
                         validate_dob, validate_appointment_date,
                         validate_appointment_time,
                         sanitize_string, sanitize_phone, sanitize_email)
-
+from auth import require_role
 
 def show_dashboard(user):
     st.markdown('<p class="page-title">📊 Receptionist Dashboard</p>', unsafe_allow_html=True)
@@ -31,6 +31,7 @@ def show_dashboard(user):
 
 
 def show_register(user):
+    require_role(["Receptionist"])
     st.markdown('<p class="page-title">🧑‍⚕️ Register New Patient</p>', unsafe_allow_html=True)
     st.caption("Fields marked * are required")
 
@@ -154,6 +155,7 @@ def show_register(user):
 
 
 def show_book(user):
+    require_role(["Receptionist"])
     st.markdown('<p class="page-title">📅 Book Appointment</p>', unsafe_allow_html=True)
 
     col1, col2 = st.columns([3, 2])
@@ -259,6 +261,7 @@ def show_book(user):
 
 
 def show_queue(user):
+    require_role(["Receptionist"])
     st.markdown('<p class="page-title">📋 Today\'s Queue</p>', unsafe_allow_html=True)
     st.caption(f"All appointments for {date.today().strftime('%d %B %Y')}")
 
@@ -309,6 +312,7 @@ def show_queue(user):
 
 
 def show(user, tab="queue"):
+    require_role(["Receptionist"])
     if tab == "patients":       show_register(user)
     elif tab == "appointments": show_book(user)
     else:                       show_queue(user)

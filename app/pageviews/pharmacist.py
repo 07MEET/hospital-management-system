@@ -7,9 +7,10 @@ import streamlit as st
 import pandas as pd
 from db import run_query, run_query_one
 from validators import validate_amount, validate_stock_quantity
-
+from auth import require_role
 
 def show_dashboard(user):
+    require_role(["Pharmacist"])
     st.markdown('<p class="page-title">💊 Pharmacist Dashboard</p>', unsafe_allow_html=True)
     c1, c2, c3 = st.columns(3)
     total  = run_query_one("SELECT COUNT(*) as c FROM medicines")
@@ -23,6 +24,7 @@ def show_dashboard(user):
 
 
 def show_dispense(user):
+    require_role(["Pharmacist"])
     st.markdown('<p class="page-title">💊 Dispense Medicine</p>', unsafe_allow_html=True)
 
     col1, col2 = st.columns([3, 2])
@@ -104,6 +106,7 @@ def show_dispense(user):
 
 
 def show_inventory(user):
+    require_role(["Pharmacist"])
     st.markdown('<p class="page-title">📦 Medicine Inventory</p>', unsafe_allow_html=True)
     st.caption("View and manage existing medicine stock. Contact admin to add new medicines.")
 
@@ -154,6 +157,7 @@ def show_inventory(user):
 
 
 def show_low_stock(user):
+    require_role(["Pharmacist"])
     st.markdown('<p class="page-title">⚠️ Low Stock Alerts</p>', unsafe_allow_html=True)
     low = run_query("""
         SELECT brand_name, generic_name, category,
