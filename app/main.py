@@ -28,7 +28,7 @@ NAV = {
     "Receptionist": ["📊 Dashboard", "👥 Patients", "📅 Appointments"],
     "Lab_Tech":      ["📊 Dashboard","⏳ Pending Orders","✅ Enter Results"],
     "Pharmacist":    ["📊 Dashboard","💊 Dispense Medicine","📦 Inventory","⚠️ Low Stock"],
-    "Billing_Staff": ["📊 Dashboard","🧾 Generate Bill","💳 Record Payment","🚨 Fraud Alerts"],
+    "Billing_Staff": ["📊 Dashboard","🧾 Generate Bill","💳 Record Payment","📜 Bill History","🚨 Fraud Alerts"],
 }
 
 
@@ -180,7 +180,9 @@ def route(user: dict, page: str):
         if "Dashboard"     in page: from pageviews.billing import show_dashboard; show_dashboard(user)
         elif "Generate"    in page: from pageviews.billing import show_generate;  show_generate(user)
         elif "Payment"     in page: from pageviews.billing import show_payment;   show_payment(user)
+        elif "History" in page: from pageviews.billing import show_bill_history; show_bill_history(user)
         elif "Fraud"       in page: from pageviews.billing import show_fraud;     show_fraud(user)
+        
 
 
 # ── Entry ─────────────────────────────────────────────────────
