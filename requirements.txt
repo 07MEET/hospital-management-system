@@ -1,4 +1,7 @@
-streamlit>=1.32.0
-psycopg2-binary>=2.9.9
-pandas>=2.0.0
-plotly>=5.18.0
+import psycopg2
+import psycopg2.extras
+import psycopg2.pool
+import streamlit as st
+import logging
+from dotenv import load_dotenv
+import os
