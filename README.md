@@ -79,6 +79,7 @@ Each role has access only to the modules required for its responsibilities.
 - Record payments using multiple payment modes
 - Maintain billing history
 - Track payment status
+- Export bills as PDF invoices
 
 ---
 
@@ -108,25 +109,23 @@ The audit trail stores previous and updated row snapshots using PostgreSQL `JSON
 
 ---
 
-# 🗄️ Database Concepts Demonstrated
+## 🗄️ Key Database Features
 
-- Normalized relational schema
-- Primary and foreign keys
-- CHECK constraints
-- Views
-- Stored procedures
-- Trigger functions
-- JSONB-based audit logging
-- Transaction-safe operations
+- PL/pgSQL Stored Procedures
+- Trigger-Based Business Rule Enforcement
+- Analytical Database Views
+- JSONB-Based Audit Logging
 - Role-Based Access Control (RBAC)
-- Indexed queries for improved performance
+- Appointment Conflict Prevention
+- Transaction-Safe Billing Workflow
+- Indexed Query Optimization
 
 ---
 
 ## 📁 Project Structure
 
 ```text
-Hospital-Management-System/
+Hospital_Management_System/
 ├── app/
 │   ├── main.py                    # Application entry point and routing
 │   ├── auth.py                    # Authentication and session management
@@ -173,8 +172,8 @@ Hospital-Management-System/
 ## Clone the repository
 
 ```bash
-git clone https://github.com/07MEET/Hospital-Management-System.git
-cd Hospital-Management-System
+git clone https://github.com/07MEET/Hospital_Management_System.git
+cd Hospital_Management_System
 ```
 
 ## Install dependencies
