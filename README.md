@@ -125,7 +125,7 @@ The audit trail stores previous and updated row snapshots using PostgreSQL `JSON
 ## 📁 Project Structure
 
 ```text
-Hospital_Management_System/
+hospital-management-system/
 ├── app/
 │   ├── main.py                    # Application entry point and routing
 │   ├── auth.py                    # Authentication and session management
@@ -172,8 +172,8 @@ Hospital_Management_System/
 ## Clone the repository
 
 ```bash
-git clone https://github.com/07MEET/Hospital_Management_System.git
-cd Hospital_Management_System
+git clone https://github.com/07MEET/hospital-management-system.git
+cd hospital-management-system
 ```
 
 ## Install dependencies
@@ -261,17 +261,12 @@ This project demonstrates practical experience in:
 
 ---
 
-# 👨‍💻 Author
+## 👨‍💻 Author
 
 **Meet Patel**  
 B.Tech – Artificial Intelligence & Machine Learning
 
-**Areas of Interest**
-- Machine Learning
-- Deep Learning
-- Generative AI
-- Data Science
-- Backend Development
+Passionate about building scalable software systems and AI-driven solutions using Machine Learning, Deep Learning, Generative AI, and Backend Technologies.
 
 ---
 
